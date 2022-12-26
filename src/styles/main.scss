@@ -1,0 +1,18 @@
+@import 'grid';
+@import 'stats';
+
+body {
+    max-width: 576px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+}
+
+.frame-top,
+.frame-middle,
+.frame-bottom {
+    pointer-events: none;
+}
+
+.titlecase {
+    text-transform: capitalize;
+}

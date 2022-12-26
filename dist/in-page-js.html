@@ -8,133 +8,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>
-    
-    in-page JS | Bootstrap Layout with Nunjucks
-    
-    </title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <style>
-    body {
-        padding-top: 70px;
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    background-color: #222222;
-}
-.footer > .container {
-    margin: 20px;
-}
-
-    </style>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
+    <link rel="stylesheet" href="assets/vendor/tachyons/tachyons.min.css"/>
+    <link rel="stylesheet" href="assets/css/main.css"/>
 </head>
-
 <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- declaring var in Nunjucks: use `set` keyword -->
-
-<!-- Brand and toggle get grouped for better mobile display -->
-<div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="/">Start Bootstrap</a>
-</div>
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    <ul class="nav navbar-nav">
-        <!-- for loop in Nunjucks -->
-        
-            
-            <li>
-            
-              <a href="index.html">
-                  <span>Home</span>
-              </a>
-            </li>
-        
-            
-            <li>
-            
-              <a href="contact-us.html">
-                  <span>Contact us</span>
-              </a>
-            </li>
-        
-            
-            <li class="active">
-            
-              <a href="in-page-js.html">
-                  <span>in-page JS</span>
-              </a>
-            </li>
-        
-    </ul>
-</div>
-<!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
-
-    <!-- Page Content -->
-    <div class="container">
-
-        
-<div class="row">
-    <div class="col-lg-12 text-center">
-        <p>
-            You may want to check the code in <code>src/pages/in-page-js.html</code> :)
-        </p>
-        <button id="click-me">Click me!</button>
-    </div>
-</div>
-
-
-    </div>
-    <!-- /.container -->
     
-    <footer class="footer">
-  <div class="container">
-    <p class="text-muted">Place sticky footer content here.</p>
-  </div>
-</footer>
 
-    <!-- jQuery Version 1.11.1 -->
-    <script src="assets/vendor/bootstrap/js/jquery.js"></script>
+<style>
+	.frame-top {
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 147.10153846153847px;
+		width: 100%;
+	} 
+	
+	.frame-bottom {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: bottom;
+		height: 119.92615384615385px;
+		width: 100%;
+	} 
+	
+	.frame-middle {
+		position: absolute;
+		left: 0;
+		top: calc(147.10153846153847px - 10px);
+		background-repeat: repeat-Y;
+		background-size: 100% 242.80615384615388px;
+		background-position: bottom;
+		height: calc(100% - 147.10153846153847px - 119.92615384615385px + 15px);
+		width: 100%;
+	}
+</style>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-    
-    
-<script type="text/javascript">
-$('#click-me').on('click', function(){
-    alert('Button clicked!');
-});
-</script>
 
+
+
+
+
+
+
+
+
+
+
+<div class="sans-serif relative pa4"> 
+	<div class="frame-top"></div>
+	<div class="frame-bottom"></div>
+	<div class="frame-middle"></div>
+
+	<div class="f2 mb3 b">Goblin Scum</div>
+	<hr>
+
+	
+		<div class="f3 mb3">
+			<em>
+	
+	
+	
+		1st
+	
+ level mook</em> <span class="titlecase">[humanoid]</span>
+		</div>
+	
+
+	<div class="f3 mb3">Initiative: 
+	+3
+</div>
+
+	
+
+	<div class="pb2 stats">
+		
+	<div class="stat grid-start-1 grid-span-1">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;">AC</span>
+		<span class="f3">16 </span>
+	</div>
+
+		
+	<div class="stat grid-start-1 grid-span-1">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;">PD</span>
+		<span class="f3">14 </span>
+	</div>
+
+		
+	<div class="stat grid-start-2 grid-span-1">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;">HP</span>
+		<span class="f3">5 (mook)</span>
+	</div>
+
+		
+	<div class="stat grid-start-1 grid-span-1">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;">MD</span>
+		<span class="f3">11 </span>
+	</div>
+
+	</div>
+
+	
+
+	
+	
+		<div class="f3 lh-copy">
+		
+			<strong>Club
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+		+6 vs. AC
+	
+	
+
+		</strong>
+		 &mdash; 
+	
+	
+	
+	
+	
+	
+	
+	
+		4 damage
+	
+
+		 &mdash; 
+	
+	
+	
+	
+	
+	
+	
+	
+		4 damage
+	
+
+		<span class="description"></span>
+		</div>
+
+	
+	
+		<div class="f3 lh-copy">
+		
+			<strong>R: Shortbow
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+		+6 vs. AC
+	
+	
+
+		</strong>
+		 &mdash; 
+	
+	
+	
+	
+	
+	
+	
+	
+		3 damage
+	
+
+		 &mdash; 
+	
+	
+	
+	
+	
+	
+	
+	
+		3 damage
+	
+
+		<span class="description"></span>
+		</div>
+
+	
+	
+		<div class="f3 lh-copy">
+		
+			<em>Shifty bugger:
+		
+		
+		</em>
+		
+		
+		<span class="description">Goblins gain a +5 bonus to disengage checks.</span>
+		</div>
+
+	
+</div>
 </body>
-
-</html>

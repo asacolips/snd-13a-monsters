@@ -1,0 +1,138 @@
+{% set h_ratio = settings.printerWidth / 975 %}
+
+<style>
+	.frame-top {
+		position: absolute;
+		left: 0;
+		top: 0;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: {{ h_ratio * 249 }}px;
+		width: 100%;
+	} 
+	
+	.frame-bottom {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: bottom;
+		height: {{ h_ratio * 203 }}px;
+		width: 100%;
+	} 
+	
+	.frame-middle {
+		position: absolute;
+		left: 0;
+		top: calc({{ h_ratio * 249 }}px - 10px);
+		background-repeat: repeat-Y;
+		background-size: 100% {{ h_ratio * 411 }}px;
+		background-position: bottom;
+		height: calc(100% - {{ h_ratio * 249 }}px - {{ h_ratio * 203 }}px + 15px);
+		width: 100%;
+	}
+</style>
+
+{% macro attr(name, val, col = 1, span = 1, role = 'troop') %}
+	<div class="stat grid-start-{{ col }} grid-span-{{ span }}">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;">{{ name }}</span>
+		<span class="f3">{{ val }} {% if role == 'mook' %}(mook){% endif %}</span>
+	</div>
+{% endmacro %}
+
+{% macro num(num) %}
+	{% if num < 0 %}-{% else %}+{% endif %}{{num}}
+{% endmacro %}
+
+{% macro attr_array(name, val) %}
+	<div class="flex mb2">
+		<span class="f3 flex-shrink-0" style="font-weight:bold;padding-right:8px;width:50%;">{{ name }}</span>
+		<span class="f3 b mr2">:</span>
+		<span class="f3">
+			{% for a in val %}
+			<div>{{ a }}</div>
+			{% endfor %}
+		</span>
+	</div>
+{% endmacro %}
+
+{% macro ord(val) %}
+	{% set j = val % 10 %}
+	{% set x = val % 100 %}
+	{% if j == 1 and k != 11 %}
+		{{val}}st
+	{% elif j == 2 and k != 12 %}
+		{{vall}}nd
+	{% elif j == 3 and k != 13 %}
+		{{val}}rd
+	{% else %}
+		{{val}}th
+	{% endif %}
+{% endmacro %}
+
+{% macro roll(val, attack = false) %}
+	{# Regular expression for inline rolls #}
+	{% set regExp = r/(.*)(\[\[)([^\[]*)(\]\])(.*)/g %}
+	{# Retrieve just the formula without whitespace #}
+	{% set formula = val.replace(regExp, '$3').replace(r/\s*/g, '') %}
+	{# Rebuild the string from the parts. #}
+	{% set clean = val.replace(regExp, '$1') + formula + val.replace(regExp, '$5') %}
+	{# Remove d20s from attack rolls #}
+	{% if attack %}
+		{{ clean.replace(r/(\d*)(d20)([kh\d]*)/g, '') }}
+	{# Handle other roll types #}
+	{% else %}
+		{{ clean }}
+	{% endif %}
+{% endmacro %}
+
+
+<div class="sans-serif relative pa4"> 
+	<div class="frame-top"></div>
+	<div class="frame-bottom"></div>
+	<div class="frame-middle"></div>
+
+	<div class="f2 mb3 b">{{ it.name }}</div>
+	<hr>
+
+	{% if it.system.details.level.value %}
+		<div class="f3 mb3">
+			<em>{{ ord(it.system.details.level.value) }} level {{it.system.details.role.value}}</em> <span class="titlecase">[{{it.system.details.type.value}}]</span>
+		</div>
+	{% endif %}
+
+	<div class="f3 mb3">Initiative: {{num(it.system.attributes.init.value)}}</div>
+
+	{% if it.description %}
+		<div class="mb3 mt3 f3"> {{ it.description | markdown }} </div>
+	{% endif %}
+
+	<div class="pb2 stats">
+		{{ attr("AC", it.system.attributes.ac.value) }}
+		{{ attr("PD", it.system.attributes.pd.value) }}
+		{{ attr("HP", it.system.attributes.hp.max, 2, 1, it.system.details.role.value) }}
+		{{ attr("MD", it.system.attributes.md.value) }}
+	</div>
+
+	{% if it.skills %}
+		  <hr>
+	{% endif %}
+
+	{% for item in it.items %}
+	
+		<div class="f3 lh-copy">
+		{% if item.type == 'action' %}
+			<strong>{{ item.name }}
+		{% else %}
+			<em>{{ item.name }}:
+		{% endif %}
+		{% if item.system.attack.value %}{{ roll(item.system.attack.value, true) }}{% endif %}
+		{% if item.type == 'action' %}</strong>{% else %}</em>{% endif %}
+		{% if item.system.hit.value %} &mdash; {{ roll(item.system.hit.value) }}{% endif %}
+		{% if item.system.hit.value %} &mdash; {{ roll(item.system.hit.value) }}{% endif %}
+		<span class="description">{{ item.system.description.value }}</span>
+		</div>
+
+	{% endfor %}
+</div>

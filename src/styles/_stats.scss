@@ -1,0 +1,11 @@
+.stats {
+    display: grid;
+    grid-column: span 2 / span 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    margin: 10px 0;
+    padding: 9px 0 5px;
+    border: 1px solid black;
+    border-left: none;
+    border-right: none;
+}
